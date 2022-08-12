@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content%}
+
+<head>
+    <title> {{ page_title }}</title>
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+    <meta charset="utf-8" />
+    <!-- responsive meta tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/sportbots.css">
+
+</head>
+
+<body>
+
+    <div class="bot-container">
+        <div class="bot-header">
+            <h1> Sportbots!</h1>
+            <div class="roi-calculator">
+                <h2>
+                    ROI Calculation => ( profit share * 12 + free bet * 12 / 2 ) / ( listed price / 100 )
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="bots-container">
+
+        <div class="bot-card-container">
+            {% for sportbot in sportbots %}
+                <div class="card">
+                    <div class="image-container">
+                        <img src="{{ sportbot.image }}" class="image" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h1 class="name">{{ sportbot.name }}</h1>
+                        <!-- <h4 class="sport">{{ sportbot.sport }}</h4>
+                        <h4 class="body">{{ sportbot.body }}</h4> -->
+                        <div class="split">
+                            <div class="value share">
+                                <h5>Profit Share:</h5>
+                                <h1 class="share">$ {{ sportbot.display_share }}</h1>
+                            </div>
+                            <div class="value bet">
+                                <h5>Free Bet:</h5>
+                                <h1 class="bet">$ {{ sportbot.bet }}</h1>
+                            </div>
+                        </div>
+                        <div class="center">
+                            <div class="value price">
+                                <h5>Listed Price:</h5>
+                                <h1 class="price">$ {{ sportbot.price }}</h1>
+                            </div>
+                            <a class="link-button roi"
+                                href="https://rollbit.com/nft/eth:0x1de7abda2d73a01aa8dca505bdcb773841211daf/{{ sportbot.token_id}}">
+                                <h1>ROI: % <span>{{ sportbot.roi }}</span></h1>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+</body>
+
+<script src="../static/js/sportbots.js" ></script>
+
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container my-2 text-white text-center">
+    <div class="row bg-dark mb-1">
+        <div class="col">
+            <h1> Lottery Stats:</h1>
+        </div>
+    </div>
+    <div class="row bg-dark">
+        <div class="col mx-1">
+            <h1> BTC Block: {{ btc_count }} of 100</h1>
+        </div>
+        <div class="col mx-1">
+            <h1> Lottery: $ {{ lotto_amount }}</h1>
+        </div>
+        <div class="col mx-1">
+            <h1> Jackpot: $ {{ jackpot_amount }}</h1>
+        </div>
+    </div>
+</div>
+
+<button class="btn bg-light"> Get Lotto History</button>
+
+{% endblock %}
