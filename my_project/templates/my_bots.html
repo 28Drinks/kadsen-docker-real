@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content%}
+<link rel="stylesheet" href="../static/my_bots.css">
+<script>
+    var Bots = {{ sportbots | tojson }}
+</script>
+<!--
+<header class="header">
+    <h1> This is the header from my_bots</h1>
+</header> -->
+
+
+<section>
+    <div class="content-container">
+        <div class="top">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Large modal</button>
+            <div>
+                <p>somthing</p>
+            </div>
+            <div>
+                <p>somthing</p>
+            </div>
+        </div>
+        <div class="middle">
+
+            <div class="bot-card-container" id="middleBotContainer">
+                <!-- {% for bot in myBots %}
+                    <div class="card" id="{{ bot.name }}">
+                        <div class="image-container">
+                            <img src="{{ bot.image }}" class="image" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h1 class="name">{{ bot.name }}</h1>
+                            <button type="button" class="btn btn-alert">Remove</button>
+                        </div>
+                    </div>
+                {% endfor %} -->
+            </div>
+
+            <!-- large modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <!-- modal content -->
+                    <div class="modal-content">
+                        <!-- modal header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Sports Bots</h4>
+                            <h1 id="test">pls change</h1>
+                            <div class="input-group" style="display: flex; width: 30%;">
+                                <input id="myInput" type="search" class="form-control rounded" placeholder="Search #Number" aria-label="Search" aria-describedby="search-addon" />
+                                <button type="button" class="btn btn-outline-primary" onclick="btterSearchFunction()">search</button>
+                            </div>
+                        </div>
+                        <!-- modal body -->
+                        <div class="modal-body" id="modal-body">
+                            <div class="bot-card-container" id="botContainer">
+                                {% for sportbot in sportbots %}
+                                    <div class="card" id="{{ sportbot.name }}">
+                                        <div class="image-container">
+                                            <img src="{{ sportbot.image }}" class="image" alt="">
+                                        </div>
+                                        <div class="card-body">
+                                            <h1 class="name">{{ sportbot.name }}</h1>
+                                            <button type="button" class="btn btn-success" id="{{ sportbot.id }}" onclick="addFunction(this.id)">Add</button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- modal end -->
+
+            <button type="button" class="btn" onclick="sendSelectedData()">Save changes</button>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

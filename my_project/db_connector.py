@@ -1,5 +1,10 @@
 from my_project import db
-from my_project.models import Winner, Staker, Lotto, Jackpot, currentJackpot, currentLotto
+from my_project.models import Winner, Staker, Lotto, Jackpot, currentJackpot, currentLotto, SportsBotsClean, SportsShare
+from datetime import datetime, timedelta
+
+today = datetime.today()
+yesterday = datetime.now() - timedelta(days=1)
+
 
 class DbWriter():
     @staticmethod
@@ -38,4 +43,24 @@ class DbWriter():
             at_time=a["at_time"]
             )
             db.session.add(updateJackpot)
+            db.session.commit()
+
+    def write_sportsbots_data_to_db(data):
+        for a in data:
+            newBot = SportsBotsClean(
+                name=a["name"],
+                image=a["image_url"],
+                token_id=a["token_id"]
+            )
+            db.session.add(newBot)
+            db.session.commit()
+
+    def write_share_data_to_db(data):
+        for a in data:
+            newShare = SportsShare(
+                sport=a,
+                value=data[a],
+                date=today
+            )
+            db.session.add(newShare)
             db.session.commit()

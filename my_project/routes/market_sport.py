@@ -17,10 +17,6 @@ from my_project.models import SportsBots
 
 #     return(sportbots)
 
-@app.route("/", methods=["GET", "POST"])
-def bots_page():
-    return render_template("index.html")
-
 
 @app.route("/sportbots", methods=["GET", "POST"])
 def sportbots_page():
