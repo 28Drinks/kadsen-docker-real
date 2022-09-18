@@ -9,6 +9,7 @@ __pycache__/
 
 valueShares.json
 
+
 # C extensions
 *.so
 
