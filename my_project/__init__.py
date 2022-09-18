@@ -9,7 +9,7 @@ from sqlalchemy_utils import create_database, database_exists
 app = Flask(__name__)
 
 # app.config.from_pyfile("config.py")
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new_db.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new_new_db.db"
 
 app.config["SECRET_KEY"] = "cc2e80bcdacafd93c0dc468f5318416d8ba00a836a938598287c717170fb4a99"
 

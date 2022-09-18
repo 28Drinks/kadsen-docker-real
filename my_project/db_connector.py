@@ -59,7 +59,10 @@ class DbWriter():
         for a in data:
             newShare = SportsShare(
                 sport=a,
-                value=data[a],
+                combined_share_value=data[a][0],
+                base_share_value=data[a][1],
+                bots_quantity=data[a][2],
+                share_quantity=data[a][3],
                 date=today
             )
             db.session.add(newShare)

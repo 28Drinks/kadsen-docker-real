@@ -140,9 +140,11 @@ class Rollbit():
         #special
         self.driver.get(self.url + "132")
         sport = "Special"
+        self._block_until_found_element("css-15cgovt")
         unformatted_share = self.driver.find_element_by_class_name("css-15cgovt").text
         value_striped = unformatted_share.replace('$','')
         value = "{:.2f}".format(float(value_striped))
+        print(value)
         sport_list.append(sport)
         value_list.append(value)
 
@@ -163,32 +165,43 @@ if __name__ == '__main__':
     try:
         rollbit = Rollbit(validation_url="https://rollbit.com/", driver=driver, url="https://rollbit.com/nft/eth:0x1de7abda2d73a01aa8dca505bdcb773841211daf/")
         rollbit.validate()
-        my_dict = rollbit.get_sportsbots_profit()
 
-        with open('valueShares.json', 'w') as fp:
-            json.dump(my_dict, fp)
+        shareValue_dict = rollbit.get_sportsbots_profit()
+        # with open('valueShares.json', 'w') as fp:
+        #     json.dump(my_dict, fp)
+
+        # with open('valueShares.json') as f:
+        #     shareValue = json.load(f)
+
+        with open('totalShares.json') as f:
+            shareQuantity_dict = json.load(f)
+
+        with open('totalBots.json') as f:
+            botsQuantity_dict = json.load(f)
 
         calculated_dict = {}
 
-        with open('valueShares.json') as f:
-            value = json.load(f)
+        for key in shareQuantity_dict:
+            botsQuantity = botsQuantity_dict[key]
+            shareQuantity = shareQuantity_dict[key]
+            shareValue = float(shareValue_dict[key])
+            # shareValueFormated = float("{:.2f}".format(shareValue))
 
-        with open('totalShares.json') as s:
-            quantity = json.load(s)
+            calculated_dict[key] = [round((shareQuantity * shareValue), 2), round(shareValue, 2), botsQuantity, shareQuantity]
 
-        for key in quantity:
-            q = quantity[key]
-            v = float(value[key])
-            v2 = float("{:.2f}".format(v))
-
-            calculated_dict[key] = round((q * v), 2)
-
-        total = 0
+        totalShare = 0
+        allBots = 0
         for x in calculated_dict:
-            total += float(calculated_dict[x])
-        calculated_dict["total"] = total
+            totalShare += float(calculated_dict[x][0])
+        for x in botsQuantity_dict:
+            allBots += botsQuantity_dict[x]
+        calculated_dict["total"] = [ totalShare, 0 , allBots , 0]
 
+
+        print(calculated_dict)
         DbWriter.write_share_data_to_db(calculated_dict)
 
+    except:
+        driver.quit()
     finally:
-      driver.quit()
+        driver.quit()

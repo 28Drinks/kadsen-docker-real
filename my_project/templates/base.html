@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="../static/base.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-      $SCRIPT_ROOT = {{ request.script_root|tojson }};
+      // $SCRIPT_ROOT = {{ request.script_root|tojson }};
     </script>
 </head>
 
 <body>
   <header>
     <div class="top-bar">
-      <h1>28 KADSEN</h1>
+      <h1>28's Lounge</h1>
     </div>
     <div class="sidenav">
-      <a href="#">History</a>
-      <a href="#">Razer feetpick</a>
-      <a href="#">Kadsen4Admin</a>
+      <a href="{{ url_for('landing_page') }}">Home</a>
+      <a href="{{ url_for('share_today') }}">Current</a>
+      <a href="{{ url_for('share_history') }}">History</a>
     </div>
   </header>
   <main>

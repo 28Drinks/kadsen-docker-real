@@ -1,0 +1,36 @@
+
+.content-container {
+    margin: 20px auto 50px auto;
+    width: 80%;
+    height: 700px;
+}
+
+.total {
+    width: 100%;
+    background-color: #10121A;
+    color: white;
+    margin: auto;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sport-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.sport {
+    margin: 10px 2.5px 10px 2.5px;
+    padding: 5px 0 0 0;
+    background-color: #141622;
+    color: rgb(255,255,255);
+    width: 20%;
+    min-width: 150px;
+    border-radius: 8px;
+    text-align: center;
+}
+.money {
+    color: rgb(114, 242, 56);;
+}

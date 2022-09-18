@@ -103,7 +103,10 @@ class User(db.Model, UserMixin):
 class SportsShare(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sport = db.Column(db.String)
-    value = db.Column(db.Float)
+    combined_share_value = db.Column(db.Float)
+    base_share_value = db.Column(db.Float)
+    share_quantity = db.Column(db.Integer)
+    bots_quantity = db.Column(db.Integer)
     date = db.Column(db.Date)
 
 

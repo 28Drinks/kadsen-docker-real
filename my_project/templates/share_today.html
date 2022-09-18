@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="..//static/share_today.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<section>
+   <div class="content-container">
+
+      <div class="sport-container">
+         {% for x in share_data_today %}
+            {% if x.sport == "total" %}
+               <div class="total">
+                  <h1>Total Share Today:</h1>
+                  <h1 class="money"><span style="color:#B1B6C6; font-size: 24px; vertical-align: middle;" >$ </span>{{'%0.2f'| format(x.combined_share_value|float)}}</h1>
+                  {% if change_in_percentage[x.sport] < 0 %}
+                     <h1><span style="color: #FF4949;">% {{ change_in_percentage[x.sport] }}</span></h1>
+                     <h1><span style="color: #FF4949;">$ {{ change_in_dollar[x.sport] }}</span></h1>
+                  {% elif change_in_percentage[x.sport]  == 0 %}
+                     <h1><span>% {{ change_in_percentage[x.sport] }}</span></h1>
+                     <h1><span> - {{ change_in_dollar[x.sport] }}</span></h1>
+                  {% else %}
+                     <h1><span style="color: rgb(114, 242, 56);">% {{ change_in_percentage[x.sport] }}</span></h1>
+                     <h1><span style="color: rgb(114, 242, 56);">$ + {{ change_in_dollar[x.sport] }}</span></h1>
+                  {% endif %}
+               </div>
+            {% endif %}
+         {% endfor %}
+         <!-- legend -->
+         <div class="sport">
+            <h4 style="color: #FF4949;"> Legend:</h4>
+            <p>$ - Combined Share Amount</p>
+            <p>% - 24h movement in %</p>
+            <p>+ - 24h movement in $</p>
+            <p>Amount of Bots</p>
+            <p>Amount of Shares</p>
+            <p>1x Share Value (Steel Skin)</p>
+         </div>
+
+         {% for x in share_data_today %}
+            {% if x.sport != "total" %}
+            <div class="sport">
+               <span>
+                  <h4>{{ x.sport }}</h4>
+                  <h4 class="money"><span style="color:#B1B6C6;">$ </span> {{ x.combined_share_value }}</h4>
+                  {% if change_in_percentage[x.sport] < 0 %}
+                     <p><span style="color: #FF4949;">% {{ change_in_percentage[x.sport] }}</span></p>
+                     <p><span style="color: #FF4949;">$ {{ change_in_dollar[x.sport] }}</span></p>
+                  {% elif change_in_percentage[x.sport] == 0 %}
+                     <p><span>% {{ change_in_percentage[x.sport] }}</span></p>
+                     <p><span> - {{ change_in_dollar[x.sport] }}</span></p>
+                  {% else %}
+                     <p><span style="color: rgb(114, 242, 56);">% {{ change_in_percentage[x.sport] }}</span></p>
+                     <p><span style="color: rgb(114, 242, 56);">$ + {{ change_in_dollar[x.sport] }}</span></p>
+                  {% endif %}
+                  <p>{{ bots_quantity[x.sport] }}</p>
+                  <p>{{ share_quantity[x.sport] }}</p>
+                  <p>{{ base_share_value[x.sport] }}</p>
+               </span>
+            </div>
+            {% endif %}
+         {% endfor %}
+      </div>
+
+      <div>
+         <canvas id="myChart" width="600" height="800"></canvas>
+      </div>
+
+      <script>
+         const data =  {
+            labels: {{labels | safe}},
+            datasets: [{
+               label: "my label",
+               data: {{ values | safe }},
+               backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 205, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(201, 203, 207, 0.2)'
+               ],
+               borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)',
+                  'rgb(201, 203, 207)'
+               ],
+               borderWidth: 1
+            }]
+         };
+
+
+         const config = {
+            type: 'doughnut',
+            options: {
+               plugins:
+                  {
+                  responsive: true,
+                  maintainAspectRatio: false,
+               }
+            }
+         };
+
+         const ctx = document.getElementById('myChart');
+
+         const myChart = new Chart(ctx, {
+            type: config["type"],
+            data: data,
+            options: config["options"]
+         });
+      </script>
+
+   </div>
+</section>
+
+<script src="..//static/js/share_today.js"></script>
+
+{% endblock %}
+

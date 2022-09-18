@@ -1,0 +1,18 @@
+
+.charts-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 25px 0 25px 0;
+}
+
+.charts-container > div {
+    width: 80%;
+}
+
+@media only screen and (min-width: 1400px) {
+    .charts-container > div {
+        width: 40%;
+    }
+}
