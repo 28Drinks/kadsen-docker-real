@@ -27,6 +27,14 @@ main {
     z-index: 28;
 }
 
+.non-img {
+  position: fixed;
+  top: 5px;
+  left: 30px;
+  height: 60px;
+  width: auto;
+}
+
 
 .sidenav {
   height: 100%;
