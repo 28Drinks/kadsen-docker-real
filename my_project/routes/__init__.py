@@ -1,10 +1,9 @@
 from my_project import app
 from flask import Flask, render_template, jsonify, request
-from flask_login import current_user
 import json
 from my_project import db
 from my_project.models import SportsShare
-from . import lotto_history , market_sport, my_bots, auth, sports_share
+from . import sports_share
 # from my_project.get_stats import get_stats
 
 

@@ -172,7 +172,8 @@ if __name__ == '__main__':
     options.add_argument('--headless')
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-    driver = webdriver.Chrome(options=options, executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe')
+    driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
+    # , executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe'
     today = date.today()
 
     try:
