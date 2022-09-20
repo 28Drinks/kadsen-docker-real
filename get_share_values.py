@@ -7,6 +7,9 @@ from sqlalchemy import Integer, insert, DateTime
 from datetime import date
 
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
 from my_project.db_connector import DbWriter
@@ -14,22 +17,11 @@ from my_project.db_connector import DbWriter
 
 class Rollbit():
 
-    #  static block-till-element-found
+    # #  static block-till-element-found
     @staticmethod
-    def _get_team_element(element: WebElement, yellow_tag_class_name: str, gray_tag_class_name: str):
-        yellow_tag_element: Union[WebElement, None] = None
-        gray_tag_element: Union[WebElement, None] = None
-        try:
-            yellow_tag_element = element.find_element_by_class_name(yellow_tag_class_name)
-        except NoSuchElementException:
-            pass
-
-        try:
-            gray_tag_element = element.find_element_by_class_name(gray_tag_class_name)
-        except NoSuchElementException:
-            pass
-
-        return yellow_tag_element or gray_tag_element
+    def _get_team_element():
+        #lmao, wen I remove this the thing below wont work anymoreXD
+        return
 
     def _block_until_found_elements(self, class_name: str, timeout: int = 60):
         print(f'Starting to block, Trying to find elements with class name {class_name}')
@@ -113,11 +105,22 @@ class Rollbit():
         ]
         sport_list = []
         value_list = []
+        nr = 0
         for number in url_list:
+            time.sleep(20)
             print(number)
+            # nr += 1
+            # if nr == 10:
+            #     time.sleep(30)
+            # else:
+            #     pass
             self.driver.get(self.url + number)
 
             self._block_until_found_elements("css-3v97he")
+
+            # WebDriverWait(self.driver, 30).until(
+            #     EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".css-3v97he"))
+            # )
 
             data = self.driver.find_elements_by_class_name("css-3v97he")
             for x in data:
@@ -128,19 +131,29 @@ class Rollbit():
 
             self._block_until_found_element("css-15cgovt")
 
+            # WebDriverWait(self.driver, 30).until(
+            #     EC.presence_of_element_located((By.CSS_SELECTOR, ".css-15cgovt"))
+            # )
+
+
             unformatted_share = self.driver.find_element_by_class_name("css-15cgovt").text
             value_striped = unformatted_share.replace('$','')
             value = "{:.2f}".format(float(value_striped))
             print(value)
-            time.sleep(1)
 
             sport_list.append(sport)
             value_list.append(value)
 
         #special
         self.driver.get(self.url + "132")
+        time.sleep(3)
         sport = "Special"
         self._block_until_found_element("css-15cgovt")
+
+        # WebDriverWait(self.driver, 60).until(
+        #     EC.presence_of_element_located((By.CSS_SELECTOR, ".css-15cgovt"))
+        # )
+
         unformatted_share = self.driver.find_element_by_class_name("css-15cgovt").text
         value_striped = unformatted_share.replace('$','')
         value = "{:.2f}".format(float(value_striped))
