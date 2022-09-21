@@ -9,76 +9,142 @@
 
       <h1 style="color: rgb(255,255,255);"> Sportshare History:</h1>
 
+      <div class="container-field">
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="total">
+               <div style="color: white;">Combined per Sport</div>
+            </label>
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="10">
+               <div style="color:#F7E95F;">Engraved Gold Skin</div>
+            </label>
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="5">
+               <div style="color:#4CAFB5;">Aqua Style Skin</div>
+            </label>
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="4">
+               <div style="color:#E8513C;">Lava Skin</div>
+            </label>
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="3">
+               <div style="color:#60A0F8;">Electric Space Skin</div>
+            </label>
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="2">
+               <div style="color:#918FA3;">Flame Ceramic Skin</div>
+            </label>
+            <label class="labl">
+               <input type="radio" id="body" name="sort" value="1" checked>
+               <div style="color:#9DA8AF;">Steel Skin</div>
+            </label>
+
+            <div>
+               <button type="button" onclick="sortBodyFunction()">Apply</button>
+            </div>
+      </div>
+
       <!-- js below creates all charts in this container -->
       <div class="charts-container" id="charts-container">
          <script>
 
-            const mylabel = {{ label | safe }}
-            const mylables = {{ labels | safe }}
-            const myBaseValues = {{ values_base | safe }}
-            const myCombinedValues = {{ values_combined | safe }}
+            window.onload = function() {
+               sortBodyFunction(input=1)
+            };
 
-            for (let i = 0; i < mylabel.length; i++) {
+            var values = [];
 
-               const config = {
-                  type: 'line',
-                  options: {
-                     scales: {
-                        x: {
-                           display: true,
-                        },
-                        y: {
-                           display: true,
-                           type: 'logarithmic'
-                        }
-                     },
-                     interaction: {
-                        intersect: false,
-                        mode: 'index',
-                     },
-                     plugins: {
-                        tooltip: {
-                        },
-                        title: {
-                           display: true,
-                           text: mylabel[i],
-                        }
-                     }
+            function sortBodyFunction(){
+               values.splice(0,values.length)
+               const input = document.querySelector('input[name="sort"]:checked').value;
+               const myBaseValues = {{ values_base | safe }}
+               const myCombinedValues = {{ values_combined | safe }}
+               if (input == "total") {
+                  for (let i = 0, len = myCombinedValues.length; i < len; i++) {
+                     var b = myCombinedValues[i];
+                     values.push(b);
                   }
-               };
+               } else {
+                  for (let i = 0, len = myBaseValues.length; i < len; i++) {
+                     var b = myBaseValues[i].map(function(x){ return x * (input); });
+                     values.push(b)
+                  }
+               }
+               clear();
+               draw();
+            };
 
-               const newDiv = document.createElement("div");
-               const newCanvas = document.createElement("canvas");
-               newCanvas.setAttribute("id", mylabel[i]);
-               newDiv.appendChild(newCanvas);
-               document.getElementById("charts-container").appendChild(newDiv);
+            const mylabel = {{ label | safe }}
+            const mylabels = {{ labels | safe }}
 
-               const ctx = document.getElementById(mylabel[i]);
+            function clear() {
+               const oldCanvas = document.getElementsByClassName("work");
+               while(oldCanvas.length > 0){
+                  oldCanvas[0].parentNode.removeChild(oldCanvas[0]);
+               }
+            };
 
-               const myChart = new Chart(ctx, {
-                  type: config["type"],
-                  data: {
-                     labels: mylables[i],
-                     datasets: [
-                           {
-                              label: "Total",
-                              data: myCombinedValues[i],
-                              backgroundColor: 'rgb(255, 0,0)',
-                              borderColor: 'rgb(60,179,113)',
-                              borderWidth: 1
+            function draw() {
+               for (let i = 0; i < mylabel.length; i++) {
+                  if (mylabel[i] == "total") {
+                     console.log("got em")
+                  } else {
+
+                     const config = {
+                        type: 'line',
+                        options: {
+                           scales: {
+                              x: {
+                                 display: true,
+                              },
+                              y: {
+                                 display: true,
+                                 type: 'logarithmic'
+                              }
                            },
-                           {
-                              label: "Single",
-                              data: myBaseValues[i],
-                              backgroundColor: 'rgb(238, 130, 238)',
-                              borderColor: 'rgb(106, 90, 205)',
-                              borderWidth: 1
+                           interaction: {
+                              intersect: false,
+                              mode: 'index',
+                           },
+                           plugins: {
+                              tooltip: {
+                              },
+                              title: {
+                                 display: true,
+                                 text: mylabel[i],
+                              }
                            }
-                        ]
-                  },
-                  options: config["options"]
-               });
+                        }
+                     };
 
+                     const newDiv = document.createElement("div");
+                     const newCanvas = document.createElement("canvas");
+                     newCanvas.setAttribute("id", mylabel[i]);
+                     newCanvas.setAttribute("class", "work");
+                     newDiv.appendChild(newCanvas);
+                     document.getElementById("charts-container").appendChild(newDiv);
+
+                     const ctx = document.getElementById(mylabel[i]);
+
+                     const myChart = new Chart(ctx, {
+                        type: config["type"],
+                        data: {
+                           labels: mylabels[i],
+                           datasets: [
+                                 {
+                                    label: mylabel[i],
+                                    data: values[i],
+                                    backgroundColor: 'rgb(238, 130, 238)',
+                                    borderColor: 'rgb(106, 90, 205)',
+                                    borderWidth: 1
+                                 }
+                              ]
+                        },
+                        options: config["options"]
+                     });
+
+                  };
+               };
             };
 
          </script>
