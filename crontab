@@ -1,0 +1,1 @@
+* * * * * docker run --rm example_app_image:latest / task.py
