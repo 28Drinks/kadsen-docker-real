@@ -11,37 +11,63 @@
 
       <div class="container-field">
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="total">
+               <input type="radio" id="body" name="sort" value="total" onclick="displaySortedByBody()">
                <div style="color: white;">Combined per Sport</div>
             </label>
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="10">
+               <input type="radio" id="body" name="sort" value="10" onclick="displaySortedByBody()">
                <div style="color:#F7E95F;">Engraved Gold Skin</div>
             </label>
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="5">
+               <input type="radio" id="body" name="sort" value="5" onclick="displaySortedByBody()">
                <div style="color:#4CAFB5;">Aqua Style Skin</div>
             </label>
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="4">
+               <input type="radio" id="body" name="sort" value="4" onclick="displaySortedByBody()">
                <div style="color:#E8513C;">Lava Skin</div>
             </label>
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="3">
+               <input type="radio" id="body" name="sort" value="3" onclick="displaySortedByBody()">
                <div style="color:#60A0F8;">Electric Space Skin</div>
             </label>
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="2">
+               <input type="radio" id="body" name="sort" value="2" onclick="displaySortedByBody()">
                <div style="color:#918FA3;">Flame Ceramic Skin</div>
             </label>
             <label class="labl">
-               <input type="radio" id="body" name="sort" value="1" checked>
+               <input type="radio" id="body" name="sort" value="1" onclick="displaySortedByBody()" checked>
                <div style="color:#9DA8AF;">Steel Skin</div>
             </label>
+      </div>
 
-            <div>
-               <button type="button" onclick="sortBodyFunction()">Apply</button>
-            </div>
+      <div class="select-sport-container">
+         <label id="search-sport-label" for="sports">Search a Sport:</label>
+         <select class="sports" id="sports" onchange="sortBySport(this)">
+         </select>
+         <button class="clearbtn" onclick="reset()">Clear Selection</button>
+         <script>
+            const mylabel = {{ label | safe }}
+
+            function createOptionElement(sport_name) {
+               var select, option
+               select = document.getElementById("sports")
+               option = document.createElement("option");
+               option.value = option.text = sport_name;
+               select.add(option);
+            };
+
+            for(let i = 0, len = mylabel.length; i < len; i++) {
+               createOptionElement(mylabel[i])
+            };
+
+            function sortBySport(selectedSport) {
+               var value = selectedSport.value;
+               var index = mylabel.indexOf(value);
+               clear();
+               draw(index);
+            };
+         </script>
+
       </div>
 
       <!-- js below creates all charts in this container -->
@@ -49,10 +75,16 @@
          <script>
 
             window.onload = function() {
-               sortBodyFunction(input=1)
+               sortBodyFunction();
+               draw_all();
             };
 
             var values = [];
+
+            function displaySortedByBody(){
+               sortBodyFunction();
+               refresh();
+            }
 
             function sortBodyFunction(){
                values.splice(0,values.length)
@@ -70,12 +102,28 @@
                      values.push(b)
                   }
                }
-               clear();
-               draw();
             };
 
-            const mylabel = {{ label | safe }}
             const mylabels = {{ labels | safe }}
+
+            function refresh() {
+               var elements = document.getElementsByClassName("work");
+               console.log(elements)
+               if (typeof elements !== 'undefined') {
+                  var ids = [];
+                  for (var i = 0; i < elements.length; i++) {
+                     console.log(elements[i].id);
+                     ids.push((elements[i].id));
+                  }
+                  clear();
+                  for (var i = 0; i < ids.length; i++) {
+                     var index = mylabel.indexOf(ids[i]);
+                     draw(index);
+                  }
+               } else {
+                  console.log("leeel")
+               };
+            };
 
             function clear() {
                const oldCanvas = document.getElementsByClassName("work");
@@ -84,8 +132,25 @@
                }
             };
 
-            function draw() {
+            function reset() {
+               var checkboxes  = document.getElementsByName("sort");
+               console.log(checkboxes)
+               for (var checkbox of checkboxes ) {
+                  checkbox.checked = false;
+               }
+               checkboxes[checkboxes.length - 1].checked = true;
+
+               clear();
+               sortBodyFunction();
+               draw_all();
+            };
+
+            function draw_all() {
                for (let i = 0; i < mylabel.length; i++) {
+                  draw(i);
+               };
+            };
+               function draw(i) {
                   if (mylabel[i] == "total") {
                      console.log("got em")
                   } else {
@@ -145,7 +210,6 @@
 
                   };
                };
-            };
 
          </script>
       </div>

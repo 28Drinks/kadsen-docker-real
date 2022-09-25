@@ -5,6 +5,13 @@
     height: 700px;
 }
 
+@media screen and (max-width: 500px){
+    .content-container {
+        width: 100%;
+        margin: 20px 0 20px 0;
+    }
+}
+
 .total {
     width: 100%;
     background-color: #10121A;

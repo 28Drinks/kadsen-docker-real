@@ -37,19 +37,15 @@ def share_today():
         share_quantity[sport] = today.share_quantity
         bots_quantity[sport] = today.bots_quantity
 
-    black_list = ["total"]
-    labels = [x.sport for x in share_data_today if x.sport not in black_list]
-    values = [x.combined_share_value for x in share_data_today if x.sport not in black_list]
 
-
-    return render_template("share_today.html", page_title="Share Today", share_data_today=share_data_today, change_in_percentage=change_in_percentage, change_in_dollar=change_in_dollar, base_share_value=base_share_value, share_quantity=share_quantity, bots_quantity=bots_quantity, labels=labels, values=values)
+    return render_template("share_today.html", page_title="Share Today", share_data_today=share_data_today, change_in_percentage=change_in_percentage, change_in_dollar=change_in_dollar, base_share_value=base_share_value, share_quantity=share_quantity, bots_quantity=bots_quantity)
 
 
 # not refactored
 @app.route("/share_history")
 def share_history():
 
-    share_data = SportsShare.query.order_by(SportsShare.date.desc()).all()
+    share_data = SportsShare.query.order_by(SportsShare.date.asc()).all()
 
     sport = [x.sport for x in share_data]
     date = [x.date.strftime('%Y-%m-%d') for x in share_data]
@@ -72,3 +68,28 @@ def share_history():
 
     return render_template("share_history.html", page_title="Share History", label=label, labels=labels, values_base=values_base, values_combined=values_combined)
 
+
+@app.route("/share_total")
+def share_total():
+    total_share = SportsShare.query.filter(SportsShare.sport == "total").order_by(SportsShare.date.asc()).all()
+
+    value = [x.combined_share_value for x in total_share]
+    date = [x.date.strftime('%Y-%m-%d') for x in total_share]
+
+    return render_template("share_total.html", page_title="Share Total", value=value, date=date)
+
+
+@app.route("/share_distribution")
+def share_distribution():
+
+
+    today1 = datetime.today()
+    today = today1.strftime('%Y-%m-%d')
+
+    share_data_today = SportsShare.query.filter(SportsShare.date == today).order_by(SportsShare.combined_share_value.desc()).all()
+
+    black_list = ["total"]
+    labels = [x.sport for x in share_data_today if x.sport not in black_list]
+    values = [x.combined_share_value for x in share_data_today if x.sport not in black_list]
+
+    return render_template("share_distribution.html", page_title="Share Destribution", labels=labels, values=values)

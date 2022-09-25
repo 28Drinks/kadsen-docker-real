@@ -16,12 +16,17 @@
 <body>
   <header>
     <div class="top-bar">
-      <img class="non-img" src="../static/images/Unbenannt-1.png">
+      <!-- <img class="non-img" src="../static/images/Unbenannt-1.png"> -->
       <h1>Kadsen's Lounge</h1>
     </div>
-    <div class="sidenav">
+
+    <button class="openbtn" id="openbtn" onclick="openNav()">☰</button>
+    <div class="sidenav" id="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
       <a href="{{ url_for('landing_page') }}">Home</a>
       <a href="{{ url_for('share_today') }}">Current</a>
+      <a href="{{ url_for('share_distribution') }}">Distribution</a>
+      <a href="{{ url_for('share_total') }}">Total</a>
       <a href="{{ url_for('share_history') }}">History</a>
     </div>
   </header>
@@ -32,6 +37,10 @@
   </main>
 
 </body>
+
+<div class="footer">
+  <h5>made by 28KADSEN</h5>
+</div>
 
 
 
@@ -47,7 +56,7 @@
 
 <!-- bootstrap css -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-<script src="../static/js/my_bots.js"></script>
+<script src="../static/js/index.js"></script>
 
 </footer>
 </html>

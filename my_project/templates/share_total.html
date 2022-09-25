@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="..//static/share_history.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<section>
+   <div class="content-container">
+
+      <!-- js below creates all charts in this container -->
+      <div class="charts-container" id="charts-container">
+
+        <canvas id="myCanvas">
+        </canvas>
+
+         <script>
+            const myLabels = {{ date | safe }}
+            const myValues = {{ value | safe }}
+
+            const config = {
+            type: 'bar',
+            options: {
+                scales: {
+                    x: {
+                        display: true,
+                    },
+                    y: {
+                        display: true,
+                        type: 'logarithmic'
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                plugins: {
+                    tooltip: {
+                    },
+                    title: {
+                        display: true,
+                        text: "Total Profit Share",
+                    }
+                }
+            }
+            };
+
+            const ctx = document.getElementById("myCanvas");
+
+            const myChart = new Chart(ctx, {
+            type: config["type"],
+            data: {
+                labels: myLabels,
+                datasets: [
+                        {
+                        label:  "Total",
+                        data: myValues,
+                        backgroundColor: 'rgb(0, 176, 3)',
+                        borderColor: 'rgb(0, 176, 3)',
+                        borderWidth: 2
+                        }
+                    ]
+            },
+            options: config["options"]
+            });
+
+         </script>
+      </div>
+
+   </div>
+</section>
+
+<script src="..//static/js/share_history.js"></script>
+
+{% endblock %}

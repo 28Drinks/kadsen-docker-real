@@ -1,6 +1,9 @@
 .content-container {
     text-align: center;
 }
+.content-container h1 {
+    margin-bottom: 25px;
+}
 
 input {
     margin: .4rem;
@@ -18,11 +21,11 @@ input {
     width: 80%;
 }
 
-@media only screen and (min-width: 1400px) {
+/* @media only screen and (min-width: 1400px) {
     .charts-container > div {
         width: 40%;
     }
-}
+} */
 
 .container-field {
     width: 60%;
@@ -46,3 +49,26 @@ input {
     background-color: #FFF01F;
     border: 1px solid #ff6600;
 }
+
+
+#search-sport-label {
+    color: white;
+}
+
+.clearbtn {
+    background-color: #ff3333;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .sports {
+    padding: 8px 16px;
+  }
