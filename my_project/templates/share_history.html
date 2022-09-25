@@ -161,10 +161,16 @@
                            scales: {
                               x: {
                                  display: true,
+                                 ticks: {
+                                    color: "white"
+                                 },
                               },
                               y: {
                                  display: true,
-                                 type: 'logarithmic'
+                                 type: 'logarithmic',
+                                 ticks: {
+                                    color: "white"
+                                 },
                               }
                            },
                            interaction: {
@@ -176,6 +182,7 @@
                               },
                               title: {
                                  display: true,
+                                 color: "white",
                                  text: mylabel[i],
                               }
                            }
@@ -183,6 +190,7 @@
                      };
 
                      const newDiv = document.createElement("div");
+                     newDiv.setAttribute("class", "cdiv");
                      const newCanvas = document.createElement("canvas");
                      newCanvas.setAttribute("id", mylabel[i]);
                      newCanvas.setAttribute("class", "work");
