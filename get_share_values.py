@@ -172,7 +172,7 @@ if __name__ == '__main__':
     options.add_argument('--headless')
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-    driver = webdriver.Chrome(options=options, executable_path="../chromedriver.exe")
+    driver = webdriver.Chrome(options=options, executable_path="/workspace/chromedriver.exe")
     # , executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe'
     today = date.today()
 
@@ -213,7 +213,7 @@ if __name__ == '__main__':
 
 
         print(calculated_dict)
-        DbWriter.write_share_data_to_db(calculated_dict)
+        # DbWriter.write_share_data_to_db(calculated_dict)
 
     except:
         driver.quit()
