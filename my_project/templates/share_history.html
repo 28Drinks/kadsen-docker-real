@@ -73,7 +73,6 @@
       <!-- js below creates all charts in this container -->
       <div class="charts-container" id="charts-container">
          <script>
-
             window.onload = function() {
                sortBodyFunction();
                draw_all();
@@ -206,9 +205,10 @@
                                  {
                                     label: mylabel[i],
                                     data: values[i],
-                                    backgroundColor: 'rgb(0, 176, 3)',
+                                    backgroundColor: 'rgb(0, 176, 3, 0.05)',
                                     borderColor: 'rgb(0, 176, 3)',
-                                    borderWidth: 2
+                                    borderWidth: 2,
+                                    fill: true,
                                  }
                               ]
                         },

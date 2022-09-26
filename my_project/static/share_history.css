@@ -73,6 +73,14 @@ input {
     padding: 8px 16px;
   }
 
-  .work {
+
+  .charts-container > div {
+    padding: 10px;
+    background-color: #1F2330;
+    border-radius: 12px;
     margin-bottom: 50px;
+  }
+
+  .work {
+
   }
