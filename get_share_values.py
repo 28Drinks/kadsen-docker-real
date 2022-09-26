@@ -13,6 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
 import chromedriver_autoinstaller
+from chromedriver_py import binary_path # this will get you the path variable
 
 from my_project.db_connector import DbWriter
 
@@ -175,7 +176,7 @@ if __name__ == '__main__':
     options.add_argument('--headless')
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options,executable_path=binary_path)
     # , executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe'
     today = date.today()
 
