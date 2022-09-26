@@ -12,6 +12,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
+import chromedriver_autoinstaller
+
 from my_project.db_connector import DbWriter
 
 
@@ -168,11 +170,12 @@ class Rollbit():
 if __name__ == '__main__':
 
     # web driver settings
+    chromedriver_autoinstaller.install()
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-    driver = webdriver.Chrome(options=options, executable_path="/workspace/chromedriver.exe")
+    driver = webdriver.Chrome(options=options)
     # , executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe'
     today = date.today()
 
