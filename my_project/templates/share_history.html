@@ -125,9 +125,9 @@
             };
 
             function clear() {
-               const oldCanvas = document.getElementsByClassName("work");
-               while(oldCanvas.length > 0){
-                  oldCanvas[0].parentNode.removeChild(oldCanvas[0]);
+               const parent = document.getElementById("charts-container");
+               while (parent.firstChild) {
+                  parent.firstChild.remove();
                }
             };
 
