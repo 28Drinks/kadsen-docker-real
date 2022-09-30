@@ -178,7 +178,9 @@ if __name__ == '__main__':
 
     driver = webdriver.Chrome(options=options)
     # executable_path=binary_path #path for module imported, not working
-    # , executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe'
+    # executable_path=r'C:\Users\28Drinks\Desktop\Test_Roll\chromedriver.exe'
+
+    # is IS reachable wtf?
     today = date.today()
 
     try:
