@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 today = datetime.today()
 yesterday = datetime.now() - timedelta(days=1)
+tomorrow = datetime.now() + timedelta(days=1)
 
 
 class DbWriter():
