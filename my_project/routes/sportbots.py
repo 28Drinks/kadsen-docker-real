@@ -16,8 +16,8 @@ def roi():
     if request.method == "POST":
         try:
             text = request.form['text']
-            processed_text = "Sportsbot #" + text
-            bot = SportBot.query.filter(SportBot.name == processed_text).first()
+            processed_text = int(text) + 1
+            bot = SportBot.query.filter(SportBot.id == processed_text).first()
 
             share_object = SportsShare.query.filter(SportsShare.sport == bot.sport).order_by(SportsShare.date.desc()).first()
 
