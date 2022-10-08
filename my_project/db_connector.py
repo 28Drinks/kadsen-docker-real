@@ -1,5 +1,5 @@
 from my_project import db
-from my_project.models import Winner, Staker, Lotto, Jackpot, currentJackpot, currentLotto, SportsBotsClean, SportsShare
+from my_project.models import Winner, Staker, Lotto, Jackpot, currentJackpot, currentLotto, SportsBotsClean, SportsShare, SportBot
 from datetime import datetime, timedelta
 
 today = datetime.today()
@@ -68,3 +68,29 @@ class DbWriter():
             )
             db.session.add(newShare)
             db.session.commit()
+
+    def write_os_sportbot_data_to_db(data):
+        for a in data:
+            try:
+                newBot = SportBot(
+                    name = a["name"],
+                    image_url = a["image_url"],
+                    revealed = a["revealed"],
+                    sportshares = a["sportshares"],
+                    freebet = a["freebet"],
+                    comboboost = a["comboboost"],
+                    body = a["body"],
+                    sport = a["sport"],
+                    eyes = a["eyes"],
+                    teeth = a["teeth"]
+                )
+            except:
+                newBot = SportBot(
+                    name = a["name"],
+                    image_url = a["image_url"],
+                    revealed = a["revealed"]
+                )
+            db.session.add(newBot)
+            db.session.commit()
+
+ 

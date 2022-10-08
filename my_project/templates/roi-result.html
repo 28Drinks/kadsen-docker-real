@@ -1,0 +1,64 @@
+{% extends "roi.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="..//static/roi.css">
+
+
+<section>
+    <div class="form-container">
+        <h1>Search for a Bot by number:</h1>
+        <div class="post-form">
+            <p>eg. "28"</p>
+            <form method="POST">
+                <input name="text">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <h1>Price / ROI Calculator:</h1>
+        <div class="calculator-form">
+            <form class="test">
+                Price: $<input name="" type="number" id="price" value="{{ price }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)" /> Yearly return: $
+                <input name="" type="number" id="yreturn" value="{{ r_total }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)"/>
+                => ROI in %<input name="" type="number" id="roi" value="40" oninput="price.value=(Number(yreturn.value) / Number(roi.value) * 100).toFixed(2)"/>
+                <!-- <output name="total" for="amount tip"></output> -->
+            </form>
+        </div>
+    </div>
+    <div class="bot-card-container">
+        <div class="card">
+            <div class="split">
+                <div class="image-container">
+                    <img src="{{ bot.image_url }}" class="image" alt="">
+                </div>
+                <div class="card-body">
+                    <h1>{{ bot.name }}</h1>
+                    <h1>{{ bot.sport }}</h1>
+                    <div>
+                        <h4>Body: {{ bot.body }}</h4>
+                        <h4>Shares: {{ bot.sportshares }}</h4>
+                    </div>
+                    <div>
+                        <h4>Eyes: {{ bot.eyes }}</h4>
+                        <h4>Value: ${{ bot.freebet }}</h4>
+                    </div>
+                    <div>
+                        <h4>Teeth: {{ bot.teeth }}</h4>
+                        <h4></div>Value: {{ bot.comboboost }}</h4>
+                    </div>
+                </div>
+            <div class="info">
+                <h4>Yearly Share: (Share ${{ base_share }} * 12)</h4>
+                <h3>$ {{ r_share }}</h3>
+                <h4>Yearly Freebet: (Freebet ${{ bot.freebet }} * 12 / 2)</h4>
+                <h3>$ {{ r_freebet}}</h3>
+                <span><h3>Yearly return:</h3><h1 style="color: #72f238;">$ {{ r_total}}</h1></span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="..//static/js/roi.js"></script>
+
+{% endblock %}
+

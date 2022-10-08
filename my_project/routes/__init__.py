@@ -3,7 +3,7 @@ from flask import Flask, render_template, jsonify, request
 import json
 from my_project import db
 from my_project.models import SportsShare
-from . import sports_share
+from . import sports_share, sportbots
 # from my_project.get_stats import get_stats
 
 

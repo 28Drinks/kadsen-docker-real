@@ -24,7 +24,7 @@ login_manager.login_message_category = "info"
 
 from my_project import routes
 
-from my_project.models import Lotto,Winner,Staker,Jackpot,currentJackpot, currentLotto , SportsBots, User
+from my_project.models import Lotto,Winner,Staker,Jackpot,currentJackpot, currentLotto , SportsBots, User, SportBot
 # db.drop_all()
 db.create_all()
 db.session.commit()

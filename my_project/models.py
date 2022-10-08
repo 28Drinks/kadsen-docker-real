@@ -110,6 +110,17 @@ class SportsShare(db.Model):
     date = db.Column(db.Date)
 
 
-
+class SportBot(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    image_url = db.Column(db.String)
+    revealed = db.Column(db.Boolean)
+    sportshares = db.Column(db.Integer)
+    freebet = db.Column(db.Integer)
+    comboboost = db.Column(db.Integer)
+    body = db.Column(db.String)
+    sport = db.Column(db.String)
+    eyes = db.Column(db.String)
+    teeth = db.Column(db.String)
 
 

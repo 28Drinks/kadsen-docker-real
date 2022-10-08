@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="..//static/roi.css">
+
+
+<section>
+    <div class="form-container">
+        <h1>Search for a Bot by number:</h1>
+        <div class="post-form">
+            <p>eg. "28"</p>
+            <form method="POST">
+                <input name="text">
+                <input type="submit">
+            </form>
+        </div>
+        <h1>Price / ROI Calculator:</h1>
+        <div class="calculator-form">
+            <form class="test" onload="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)">
+                Price: $<input name="one" type="number" id="price" value="1000" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)" /> Yearly return: $
+                <input name="two" type="number" id="yreturn" value="400" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)"/> =
+                => ROI in %<input name="roi" type="number" id="roi" value="40" oninput="price.value=(Number(yreturn.value) / Number(roi.value) * 100).toFixed(2)"/>
+                <!-- <output name="total" for="amount tip"></output> -->
+            </form>
+        </div>
+    </div>
+    <!-- here come the roi-result content -->
+    {% block contentt %}
+    {% endblock %}
+</section>
+
+<script src="..//static/js/roi.js"></script>
+
+{% endblock %}
+
