@@ -55,14 +55,14 @@
     padding: 14px 28px;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #10121A;
-    color: white;
+    border: 3px solid #10121A;
+    color: black;
     display: block;
     margin: 10px auto;
 }
 .day-border-color {
-    border: 1px solid #FFF01F;
+    background-color:#FFF01F;
 }
 .weekly-border-color {
-    border-color: rgb(255,61,61);
+    background-color: rgb(255,61,61);
 }
