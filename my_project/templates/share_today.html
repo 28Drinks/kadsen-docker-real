@@ -7,10 +7,12 @@
 <section>
    <div class="content-container">
 
-      <div class="sport-container">
+      <button class="day-border-color" id="toggle-button">DAY</button>
+
+      <div class="sport-container" id="day">
          {% for x in share_data_today %}
             {% if x.sport == "total" %}
-               <div class="total">
+               <div class="total sport-day">
                   <h1>Total Share Today:</h1>
                   <h1 class="money"><span style="color:#B1B6C6; font-size: 24px; vertical-align: middle;" >$ </span>{{'%0.2f'| format(x.combined_share_value|float)}}</h1>
                   {% if change_in_percentage[x.sport] < 0 %}
@@ -27,7 +29,7 @@
             {% endif %}
          {% endfor %}
          <!-- legend -->
-         <div class="sport">
+         <div class="sport sport-day">
             <h4 style="color: #FF4949;"> Legend:</h4>
             <p>$ - Combined Share Amount</p>
             <p>% - 24h movement in %</p>
@@ -39,7 +41,7 @@
 
          {% for x in share_data_today %}
             {% if x.sport != "total" %}
-            <div class="sport">
+            <div class="sport sport-day">
                <span>
                   <h4>{{ x.sport }}</h4>
                   <h4 class="money"><span style="color:#B1B6C6;">$ </span> {{ x.combined_share_value }}</h4>
@@ -61,8 +63,81 @@
             {% endif %}
          {% endfor %}
       </div>
+
+   <!-- same as above with differenct values -->
+   <!-- js to toggle visibility between -->
+
+      <div class="sport-container" id="week">
+         {% for x in share_data_today %}
+            {% if x.sport == "total" %}
+               <div class="total sport-week">
+                  <h1>Total Share Today:</h1>
+                  <h1 class="money"><span style="color:#B1B6C6; font-size: 24px; vertical-align: middle;" >$ </span>{{'%0.2f'| format(x.combined_share_value|float)}}</h1>
+                  {% if change_in_percentage_week[x.sport] < 0 %}
+                     <h1><span style="color: #FF4949;">% {{ change_in_percentage_week[x.sport] }}</span></h1>
+                     <h1><span style="color: #FF4949;">$ {{ change_in_dollar_week[x.sport] }}</span></h1>
+                  {% elif change_in_percentage_week[x.sport]  == 0 %}
+                     <h1><span>% {{ change_in_percentage_week[x.sport] }}</span></h1>
+                     <h1><span> - {{ change_in_dollar_week[x.sport] }}</span></h1>
+                  {% else %}
+                     <h1><span style="color: rgb(114, 242, 56);">% {{ change_in_percentage_week[x.sport] }}</span></h1>
+                     <h1><span style="color: rgb(114, 242, 56);">$ + {{ change_in_dollar_week[x.sport] }}</span></h1>
+                  {% endif %}
+               </div>
+            {% endif %}
+         {% endfor %}
+         <!-- legend -->
+         <div class="sport sport-week">
+            <h4 style="color: #FF4949;"> Legend:</h4>
+            <p>$ - Combined Share Amount</p>
+            <p>% - 7 Days movement in %</p>
+            <p>+ - 7 Days movement in $</p>
+            <p>Amount of Bots</p>
+            <p>Amount of Shares</p>
+            <p>1x Share Value (Steel Skin)</p>
+         </div>
+
+         {% for x in share_data_today %}
+            {% if x.sport != "total" %}
+            <div class="sport sport-week">
+               <span>
+                  <h4>{{ x.sport }}</h4>
+                  <h4 class="money"><span style="color:#B1B6C6;">$ </span> {{ x.combined_share_value }}</h4>
+                  {% if change_in_percentage_week[x.sport] < 0 %}
+                     <p><span style="color: #FF4949;">% {{ change_in_percentage_week[x.sport] }}</span></p>
+                     <p><span style="color: #FF4949;">$ {{ change_in_dollar_week[x.sport] }}</span></p>
+                  {% elif change_in_percentage_week[x.sport] == 0 %}
+                     <p><span>% {{ change_in_percentage_week[x.sport] }}</span></p>
+                     <p><span> - {{ change_in_dollar_week[x.sport] }}</span></p>
+                  {% else %}
+                     <p><span style="color: rgb(114, 242, 56);">% {{ change_in_percentage_week[x.sport] }}</span></p>
+                     <p><span style="color: rgb(114, 242, 56);">$ + {{ change_in_dollar_week[x.sport] }}</span></p>
+                  {% endif %}
+                  <p>{{ bots_quantity[x.sport] }}</p>
+                  <p>{{ share_quantity[x.sport] }}</p>
+                  <p>{{ base_share_value[x.sport] }}</p>
+               </span>
+            </div>
+            {% endif %}
+         {% endfor %}
+      </div>
    </div>
 </section>
+
+<script>
+
+$('#week').hide();
+$('#toggle-button').on('click',
+  function() {
+    $('#day, #week').toggle();
+    $('#toggle-button').toggleClass('weekly-border-color');
+    $(this).text(function(i, text){
+          return text === "WEEK" ? "DAY" : "WEEK";
+      });
+  }
+);
+
+ </script>
 
 <script src="..//static/js/share_today.js"></script>
 
