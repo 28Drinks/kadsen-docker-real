@@ -7,8 +7,10 @@
 <section>
    <div class="content-container">
 
-      <button class="day-border-color" id="toggle-button">DAY</button>
-
+      <div class="toggle-div">
+         <button class="day-border-color" id="toggle-button">DAY</button>
+         <h3>Toggle Day/Week</h3>
+      </div>
       <div class="sport-container" id="day">
          {% for x in share_data_today %}
             {% if x.sport == "total" %}

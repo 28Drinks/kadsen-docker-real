@@ -10,7 +10,9 @@
         <div class="post-form">
             <p>eg. "28"</p>
             <form method="POST">
-                <input name="text">
+                Sportsbot #<input type="number" step="1" min="0" max="9999" name="input_bot_number" value="{{ bot_number }}">
+                Share %<input name="share_setting" value="{{ share_setting }}" placeholder="100">
+                Freebet %<input name="bet_setting" value="{{ bet_setting }}" placeholder="50">
                 <input type="submit">
             </form>
         </div>

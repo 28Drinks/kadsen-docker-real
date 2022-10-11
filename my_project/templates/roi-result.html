@@ -10,16 +10,18 @@
         <div class="post-form">
             <p>eg. "28"</p>
             <form method="POST">
-                <input name="text">
+                Sportsbot #<input type="number" step="1" min="0" max="9999" name="input_bot_number" value="{{ bot_number }}">
+                Share %<input name="share_setting" value="{{ share_setting }}" placeholder="100">
+                Freebet %<input name="bet_setting" value="{{ bet_setting }}" placeholder="50">
                 <input type="submit" value="Submit">
             </form>
         </div>
         <h1>Price / ROI Calculator:</h1>
         <div class="calculator-form">
             <form class="test">
-                Price: $<input name="" type="number" id="price" value="{{ price }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)" /> Yearly return: $
-                <input name="" type="number" id="yreturn" value="{{ r_total }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)"/>
-                => ROI in %<input name="" type="number" id="roi" value="40" oninput="price.value=(Number(yreturn.value) / Number(roi.value) * 100).toFixed(2)"/>
+                Price: $<input name="" type="number" id="price" placeholder="price" value="{{ '%0.2f'| format(return_values_calculated['price']) }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)" /> Yearly return: $
+                <input name="" type="number" id="yreturn" placeholder="yearly return" value="{{ '%0.2f'| format(return_values_calculated['total_return']) }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)"/>
+                => ROI in %<input name="" type="number" id="roi" placeholder="roi" value="40" oninput="price.value=(Number(yreturn.value) / Number(roi.value) * 100).toFixed(2)"/>
                 <!-- <output name="total" for="amount tip"></output> -->
             </form>
         </div>
@@ -47,11 +49,11 @@
                     </div>
                 </div>
             <div class="info">
-                <h4>Yearly Share: (Share ${{ base_share }} * {{ bot.sportshares }} * 12)</h4>
-                <h3>$ {{ r_share }}</h3>
-                <h4>Yearly Freebet: (Freebet ${{ bot.freebet }} * 12 / 2)</h4>
-                <h3>$ {{ r_freebet}}</h3>
-                <span><h3>Yearly return:</h3><h1 style="color: #72f238;">$ {{ r_total}}</h1></span>
+                <h4>Yearly Share: (Share ${{ base_share }} * {{ bot.sportshares }} * 12 * {{ share_setting|float / 100 }})</h4>
+                <h3>$ {{'%0.2f'| format(return_values_calculated["share_return"]) }}</h3>
+                <h4>Yearly Freebet: (Freebet ${{ bot.freebet }} * 12 * {{ bet_setting|float / 100 }})</h4>
+                <h3>$ {{'%0.2f'| format(return_values_calculated["bet_return"]) }}</h3>
+                <span><h3>Yearly return:</h3><h1 style="color: #72f238;">$ {{ '%0.2f'| format(return_values_calculated["total_return"]) }}</h1></span>
             </div>
         </div>
     </div>
