@@ -9,7 +9,7 @@
         <h1>Search for a Bot by number:</h1>
         <div class="post-form">
             <p>eg. "28"</p>
-            <form method="POST">
+            <form method="POST"class="responsive-post-form">
                 Sportsbot #<input type="number" step="1" min="0" max="9999" name="input_bot_number" value="{{ bot_number }}">
                 Share %<input name="share_setting" value="{{ share_setting }}" placeholder="100">
                 Freebet %<input name="bet_setting" value="{{ bet_setting }}" placeholder="50">
@@ -18,7 +18,7 @@
         </div>
         <h1>Price / ROI Calculator:</h1>
         <div class="calculator-form">
-            <form class="test">
+            <form class="responsive-form">
                 Price: $<input name="" type="number" id="price" placeholder="price" value="{{ '%0.2f'| format(return_values_calculated['price']) }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)" /> Yearly return: $
                 <input name="" type="number" id="yreturn" placeholder="yearly return" value="{{ '%0.2f'| format(return_values_calculated['total_return']) }}" oninput="roi.value=(Number(yreturn.value) / Number(price.value) * 100 ).toFixed(2)"/>
                 => ROI in %<input name="" type="number" id="roi" placeholder="roi" value="40" oninput="price.value=(Number(yreturn.value) / Number(roi.value) * 100).toFixed(2)"/>

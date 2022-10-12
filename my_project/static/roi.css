@@ -20,13 +20,30 @@ h3 {
 }
 
 @media only screen and (max-width: 1400px) {
-    .test {
+    .responsive-form {
         margin: auto;
         display: flex;
         flex-direction: column;
     }
-    .test input {
+    .responsive-form input {
         margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .responsive-post-form {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .responsive-post-form input {
+        margin: 10px;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .responsive-post-form input {
+        margin-bottom: 10px;
     }
 }
 
