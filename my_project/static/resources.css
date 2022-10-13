@@ -1,0 +1,58 @@
+.content-container {
+    margin: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.links-container {
+    text-align: center;
+    color: white;
+    border-radius: 8px;
+    margin: 20px 0 20px 0;
+    padding: 20px 20px 50px 20px;
+    width: 45%;
+    background-color: #1F2330;
+}
+
+.link-div {
+    color: black;
+    text-align: center;
+    margin: 0 20px;
+    padding: 20px 10px;
+    background-color: rgb(255, 240, 31);
+    border-radius: 8px;
+}
+
+a {
+    word-wrap: break-word;
+}
+
+.link-ele {
+    margin: auto;
+    width: 80%;
+}
+
+@media only screen and (max-width: 1400px) {
+    .links-container{
+        width: 80%;
+    }
+    .link-ele {
+        margin: auto;
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .link-ele {
+        margin: auto;
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .link-ele {
+        width: 100%;
+    }
+}
+
