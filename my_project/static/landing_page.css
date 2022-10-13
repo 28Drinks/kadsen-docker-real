@@ -45,6 +45,7 @@ h1 {
     display: flex;
     flex-wrap: wrap ;
     justify-content: space-evenly;
+    row-gap: 20px;
 }
 
 
@@ -98,4 +99,58 @@ h1 {
         width: 80%;
         margin: 0 0 10% 10%;
     }
+}
+
+.trending {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1F2330;
+    border-radius: 8px;
+    margin: 25px 0;
+}
+.trending p {
+    margin: 0;
+}
+
+.split {
+    display: flex;
+    align-items: center;
+}
+.split-volume {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.sport-volume {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #161925;
+    text-align: center;
+}
+
+.up , .down {
+    background-color: #161925;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.up-arrow {
+    margin-right: 10px;
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid green;
+}
+.down-arrow {
+    margin-right: 10px;
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid red;
 }

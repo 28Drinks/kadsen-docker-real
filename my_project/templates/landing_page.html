@@ -12,6 +12,45 @@
         </p>
     </div>
 
+    <div class="trending">
+        <h1>Trending Sports:</h1>
+        <p>( last 24h )</p>
+        <h3>Highest Volume:</h3>
+        <div class="top-volume split split-volume">
+            {% for x in top_sports %}
+            <div class="sport-volume">
+                <h3>{{ x.sport }}</h3>
+                <p>$ {{ x.combined_share_value }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <h3>Top Moover:</h3>
+        <div class="top-moover split">
+            <div class="percentage">
+                <p style="text-align: center;">%</p>
+                <div class="up split">
+                    <div class="up-arrow"></div>
+                    <h4>{{ movement_dict["lowest_percent"][1] }} % {{ movement_dict["lowest_percent"][0] }}</h4>
+                </div>
+                <div class="down split">
+                    <div class="down-arrow"></div>
+                    <h4>{{ movement_dict["highest_percent"][1] }} % {{ movement_dict["highest_percent"][0] }}</h4>
+                </div>
+            </div>
+            <div class="dollar">
+                <p style="text-align: center;">$</p>
+                <div class="up split">
+                    <div class="up-arrow"></div>
+                    <h4>{{ movement_dict["highest_dollar"][1] }} $ {{ movement_dict["highest_dollar"][0] }}</h4>
+                </div>
+                <div class="down split">
+                    <div class="down-arrow"></div>
+                    <h4>{{ movement_dict["lowest_dollar"][1] }} $ {{ movement_dict["lowest_dollar"][0] }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="preview-container">
         <div class="card">
             <div class="img-container">
@@ -27,6 +66,23 @@
             </div>
             <div class="describtion">
                 <a href="{{ url_for('share_history') }}">Sports Share History</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="img-container">
+                <img src="../static/images/calculator.png">
+            </div>
+            <div class="describtion">
+                <a href="{{ url_for('roi') }}">Price / ROI Calculator</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="img-container">
+                <img src="../static/images/links.png">
+            </div>
+            <div class="describtion">
+                <a href="{{ url_for('resources_page') }}">Resourcess / Links</a>
             </div>
         </div>
     </div>
