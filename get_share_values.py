@@ -168,7 +168,8 @@ class Rollbit():
 
         return sport_value_dict
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def main():
 
     # web driver settings
     chromedriver_autoinstaller.install()
@@ -220,7 +221,7 @@ if __name__ == '__main__':
 
 
         print(calculated_dict)
-        DbWriter.write_share_data_to_db(calculated_dict)
+        # DbWriter.write_share_data_to_db(calculated_dict)
 
     except:
         driver.quit()
