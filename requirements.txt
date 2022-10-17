@@ -3,7 +3,7 @@ APScheduler==3.9.1
 async-generator==1.10
 atomicwrites==1.4.0
 attrs==20.3.0
-backports.zoneinfo==0.2.1
+# backports.zoneinfo==0.2.1;python_version<"3.9"
 bcrypt==3.2.0
 beautifulsoup4==4.11.1
 black==20.8b1
