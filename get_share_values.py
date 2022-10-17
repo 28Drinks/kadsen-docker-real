@@ -172,7 +172,7 @@ class Rollbit():
 def main():
 
     # web driver settings
-    chromedriver_autoinstaller.install()
+    chromedriver_autoinstaller.install(cwd=True)
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
