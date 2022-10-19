@@ -6,7 +6,7 @@ from my_project import db
 from my_project.models import SportsShare
 from . import sports_share, sportbots
 
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 
 # from my_project.get_stats import get_stats
@@ -29,6 +29,8 @@ def landing_page():
     today = today1.strftime('%Y-%m-%d')
     yesterday1 = datetime.now() - timedelta(days=1)
     yesterday = yesterday1.strftime('%Y-%m-%d')
+
+    print(datetime.now())
 
     black_list = ["total"]
 
@@ -68,5 +70,7 @@ def landing_page():
 
 @app.route("/reources_page")
 def resources_page():
+
+    print("hello from resources")
 
     return render_template("resources.html", pagetitle="Resources")

@@ -11,6 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 
 import chromedriver_autoinstaller
 # from chromedriver_py import binary_path
@@ -170,12 +171,16 @@ class Rollbit():
 
 # if __name__ == '__main__':
 def main():
+    print("getting the script going!")
 
     # web driver settings
     chromedriver_autoinstaller.install(cwd=True)
-    options = webdriver.ChromeOptions()
+    options = Options()
     options.add_argument('--headless')
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-extensions')
+    # options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
     driver = webdriver.Chrome(options=options)
     # executable_path=binary_path #path for module imported, not working
@@ -221,7 +226,7 @@ def main():
 
 
         print(calculated_dict)
-        # DbWriter.write_share_data_to_db(calculated_dict)
+        DbWriter.write_share_data_to_db(calculated_dict)
 
     except:
         driver.quit()
