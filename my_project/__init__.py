@@ -35,7 +35,6 @@ db.session.commit()
 
 import get_share_values
 
-@sched.scheduled_job(trigger = 'cron', minute = 15, hour = 23)
-def print_hello():
-    print("starting the job")
+@sched.scheduled_job(trigger = 'cron', minute = 36, hour = 20)
+def get_values():
     get_share_values.main()
